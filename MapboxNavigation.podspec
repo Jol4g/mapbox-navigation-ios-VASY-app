@@ -47,6 +47,7 @@ Pod::Spec.new do |s|
   s.dependency "MapboxMaps", "~> 10.18.2"
   s.dependency "Solar-dev", "~> 3.0"
   s.dependency "MapboxSpeech", "~> 2.0"
+  s.dependency 'Turf'
 
   s.swift_version = "5.5"
 
