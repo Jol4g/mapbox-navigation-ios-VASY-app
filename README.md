@@ -5,7 +5,7 @@
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
 [![CocoaPods](https://img.shields.io/cocoapods/v/MapboxNavigation.svg)](https://cocoapods.org/pods/MapboxNavigation/)
 
-<img alt="Mapbox Navigation SDK" src="docs/img/navigation.png" width="258" align="right" />
+<img alt="Mapbox Navigation SDK" src="./docs/img/navigation.png" width="258" align="right" />
 
 Mapbox Navigation gives you all the tools you need to add turn-by-turn navigation to your iOS application.
 
@@ -110,7 +110,7 @@ To install the MapboxNavigation framework using [Carthage](https://github.com/Ca
 
 1. Follow the rest of [Carthage’s iOS integration instructions](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos). Your application target’s Embed Frameworks build phase should include `MapboxCoreNavigation.xcframework`, `MapboxNavigationNative.xcframework`, and `MapboxCommon.xcframework`.
 
-MapboxNavigation no longer supports Carthage as of v2.0.0-alpha.1. However, if you are building a user interface from scratch, you can [install just the MapboxCoreNavigation framework using Carthage](custom-navigation.md#using-carthage).
+MapboxNavigation no longer supports Carthage as of v2.0.0-alpha.1. However, if you are building a user interface from scratch, you can [install just the MapboxCoreNavigation framework using Carthage](./custom-navigation.md#using-carthage).
 
 ## Configuration
 
@@ -193,12 +193,12 @@ NavigationViewController(for: routeResponse, routeIndex: routeIndex, routeOption
 
 ### Starting from scratch
 
-If your application needs something totally custom, such as a voice-only experience or an unconventional user interface, consult the [Core Navigation installation guide](custom-navigation.md).
+If your application needs something totally custom, such as a voice-only experience or an unconventional user interface, consult the [Core Navigation installation guide](./custom-navigation.md).
 
 ## Contributing
 
-We welcome feedback and code contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+We welcome feedback and code contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 ## License
 
-The Mapbox Navigation SDK for iOS is released under the Mapbox Terms of Service. See [LICENSE.md](LICENSE.md) for details.
+The Mapbox Navigation SDK for iOS is released under the Mapbox Terms of Service. See [LICENSE.md](./LICENSE.md) for details.
