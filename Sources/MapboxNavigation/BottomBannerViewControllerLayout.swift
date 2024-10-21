@@ -67,7 +67,7 @@ extension BottomBannerViewController {
     }
     
     fileprivate func setupVerticalCompactLayout(_ layoutConstraints: inout [NSLayoutConstraint]) {
-        layoutConstraints.append(bottomBannerView.heightAnchor.constraint(equalToConstant: 0))
+        layoutConstraints.append(bottomBannerView.heightAnchor.constraint(equalToConstant: 60))
         
         layoutConstraints.append(timeRemainingLabel.leadingAnchor.constraint(equalTo: bottomBannerView.leadingAnchor, constant: 10))
         layoutConstraints.append(timeRemainingLabel.lastBaselineAnchor.constraint(equalTo: bottomBannerView.centerYAnchor, constant: 0))

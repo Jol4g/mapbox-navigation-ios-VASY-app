@@ -51,8 +51,7 @@ open class BottomBannerViewController: UIViewController, NavigationComponent {
     /**
      The main bottom banner view that all UI components are added to.
      */
-    // edited
-    lazy open var bottomBannerView: BottomBannerView = .forAutoLayout(hidden: true)
+    lazy open var bottomBannerView: BottomBannerView = .forAutoLayout()
     
     /**
      The label that displays the estimated time until the user arrives at the final destination.

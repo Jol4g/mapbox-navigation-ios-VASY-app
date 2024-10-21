@@ -156,7 +156,7 @@ open class NavigationView: UIView {
      A host view for `WayNameLabel` that shows a road name and a shield icon.
      */
     public lazy var wayNameView: WayNameView = {
-        let wayNameView: WayNameView = .forAutoLayout(hidden: true)
+        let wayNameView: WayNameView = .forAutoLayout()
         wayNameView.containerView.isHidden = true
         wayNameView.containerView.clipsToBounds = true
         return wayNameView
@@ -207,7 +207,7 @@ open class NavigationView: UIView {
     
     func setupStackViews() {
         if let buttons = floatingButtons {
-         // Editied :   floatingStackView.addArrangedSubviews(buttons)
+            floatingStackView.addArrangedSubviews(buttons)
         }
     }
     
@@ -280,7 +280,7 @@ open class NavigationView: UIView {
     open override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         DayStyle().apply()
-        [navigationMapView, topBannerContainerView].forEach({ $0.prepareForInterfaceBuilder() })
+        [navigationMapView, topBannerContainerView, bottomBannerContainerView].forEach({ $0.prepareForInterfaceBuilder() })
         wayNameView.text = "Street Label"
     }
 }
