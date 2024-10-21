@@ -192,13 +192,15 @@ open class BaseInstructionsBannerView: UIControl {
     public func update(for instruction: VisualInstructionBanner?) {
         let secondaryInstruction = instruction?.secondaryInstruction
         primaryLabel.numberOfLines = secondaryInstruction == nil ? 2 : 1
-        
+        // Edited 00:08 | 11/10/2024
+        primaryLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        secondaryLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+
         if secondaryInstruction == nil {
             centerYAlignInstructions()
         } else {
             baselineAlignInstructions()
         }
-        
         primaryLabel.instruction = instruction?.primaryInstruction
         maneuverView.visualInstruction = instruction?.primaryInstruction
         maneuverView.drivingSide = instruction?.drivingSide ?? .right
@@ -215,6 +217,9 @@ open class BaseInstructionsBannerView: UIControl {
                                             maneuverType: .turn,
                                             maneuverDirection: .left,
                                             components: [component])
+        // Edited 00:08 | 11/10/2024
+        primaryLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+
         primaryLabel.instruction = instruction
         
         distance = 100
@@ -246,7 +251,7 @@ open class BaseInstructionsBannerView: UIControl {
         let distanceLabel = DistanceLabel()
         distanceLabel.translatesAutoresizingMaskIntoConstraints = false
         distanceLabel.adjustsFontSizeToFitWidth = true
-        distanceLabel.minimumScaleFactor = 16.0 / 22.0
+        distanceLabel.minimumScaleFactor = 10.0 / 12.0
         addSubview(distanceLabel)
         self.distanceLabel = distanceLabel
         
@@ -254,10 +259,12 @@ open class BaseInstructionsBannerView: UIControl {
         primaryLabel.instructionDelegate = delegate
         primaryLabel.translatesAutoresizingMaskIntoConstraints = false
         primaryLabel.allowsDefaultTighteningForTruncation = true
-        primaryLabel.adjustsFontSizeToFitWidth = true
+        primaryLabel.adjustsFontSizeToFitWidth = false
         primaryLabel.numberOfLines = 1
         primaryLabel.minimumScaleFactor = 20.0 / 30.0
         primaryLabel.lineBreakMode = .byTruncatingTail
+        primaryLabel.font = UIFont.systemFont(ofSize: 10, weight: .bold)
+
         addSubview(primaryLabel)
         self.primaryLabel = primaryLabel
         
@@ -268,6 +275,8 @@ open class BaseInstructionsBannerView: UIControl {
         secondaryLabel.numberOfLines = 1
         secondaryLabel.minimumScaleFactor = 20.0 / 26.0
         secondaryLabel.lineBreakMode = .byTruncatingTail
+        secondaryLabel.font = UIFont.systemFont(ofSize: 10, weight: .bold)
+
         addSubview(secondaryLabel)
         self.secondaryLabel = secondaryLabel
         
@@ -359,7 +368,7 @@ open class BaseInstructionsBannerView: UIControl {
                                                                       constant: 0))
         
         // Drag Indicator View
-        stepListIndicatorView.heightAnchor.constraint(equalToConstant: BaseInstructionsBannerView.stepListIndicatorViewSize.height).isActive = true
+        stepListIndicatorView.heightAnchor.constraint(equalToConstant: BaseInstructionsBannerView.stepListIndicatorViewSize.height).isActive = false
         stepListIndicatorView.widthAnchor.constraint(equalToConstant: BaseInstructionsBannerView.stepListIndicatorViewSize.width).isActive = true
         stepListIndicatorView.bottomAnchor.constraint(equalTo: bottomAnchor,
                                                       constant: -BaseInstructionsBannerView.padding / 2).isActive = true
