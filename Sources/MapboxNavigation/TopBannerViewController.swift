@@ -30,11 +30,37 @@ open class TopBannerViewController: UIViewController {
     /// A banner view that contains the current step instructions and responds to tap and swipe gestures.
     public private(set) lazy var instructionsBannerView: InstructionsBannerView = {
         let banner: InstructionsBannerView = .forAutoLayout()
+        
+        // Set a constant height
         banner.heightAnchor.constraint(equalToConstant: instructionsBannerHeight).isActive = true
         banner.delegate = self
-        banner.swipeable = true
+        banner.swipeable = false
+        
+        // Set the background color with transparency
+        banner.backgroundColor = UIColor.defaultBackgroundColor
+        
+        // Set the corner radius
+        banner.layer.cornerRadius = 28 // Adjust the value as needed
+        banner.layer.masksToBounds = true // Ensure the corners are clipped
+
+        // Ensure the view can use Auto Layout
+        banner.translatesAutoresizingMaskIntoConstraints = false
+
+        // After adding the banner to a superview, apply the following constraints
+        if let superview = banner.superview {
+            NSLayoutConstraint.activate([
+                // Set width to 80% of the superview's width
+                banner.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.8),
+                
+                // Leading, trailing, and top margins
+                banner.centerXAnchor.constraint(equalTo: superview.centerXAnchor), // Center it horizontally
+                banner.topAnchor.constraint(equalTo: superview.topAnchor, constant: 20) // Adjust the value as needed
+            ])
+        }
+
         return banner
     }()
+
     
     /**
      A view that contains one or more images indicating which lanes of road the user should take to complete the maneuver.
@@ -56,10 +82,11 @@ open class TopBannerViewController: UIViewController {
      */
     public var junctionView: JunctionView = .forAutoLayout(hidden: true)
     
-    private let instructionsBannerHeight: CGFloat = 100.0
+    private let instructionsBannerHeight: CGFloat = 85
     
     private var informationChildren: [UIView] {
-        return [instructionsBannerView] + secondaryChildren + [lanesView]
+        // Edited
+        return [instructionsBannerView] + [lanesView]
     }
     private var secondaryChildren: [UIView] {
         return [nextBannerView, statusView, junctionView]
@@ -92,6 +119,7 @@ open class TopBannerViewController: UIViewController {
     }
     
     private func addTopPaddingConstraints() {
+        topPaddingView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
         let top = topPaddingView.topAnchor.constraint(equalTo: view.topAnchor)
         let leading = topPaddingView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor)
         let trailing = topPaddingView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor)
@@ -102,8 +130,8 @@ open class TopBannerViewController: UIViewController {
     
     private func addStackConstraints() {
         let top = informationStackView.topAnchor.constraint(equalTo: view.safeTopAnchor)
-        let leading = informationStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        let trailing = informationStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        let leading = informationStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20) // 20px margin
+        let trailing = informationStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20) // 20px margin
         let bottom = informationStackBottomPinConstraint
         //bottom is taken care of as part of steps TVC show/hide
         
@@ -112,6 +140,7 @@ open class TopBannerViewController: UIViewController {
     
     private func setupInformationStackView() {
         addInstructionsBanner()
+        return
         let subviews = [lanesView] + secondaryChildren
         informationStackView.addArrangedSubviews(subviews)
         for child in informationChildren {
@@ -181,8 +210,10 @@ open class TopBannerViewController: UIViewController {
     
     private func addInstructionsBanner() {
         informationStackView.insertArrangedSubview(instructionsBannerView, at: 0)
+
         instructionsBannerView.delegate = self
-        instructionsBannerView.swipeable = true
+        // edited
+        instructionsBannerView.swipeable = false
     }
     
     // MARK: Previewing Steps
@@ -243,7 +274,7 @@ open class TopBannerViewController: UIViewController {
     
     // MARK: Viewing Steps the Table
     
-    lazy var stepsContainer: UIView = .forAutoLayout()
+    lazy var stepsContainer: UIView = .forAutoLayout(hidden: true)
     var stepsViewController: StepsViewController?
     
     lazy var stepsContainerConstraints: [NSLayoutConstraint] = {
@@ -275,6 +306,7 @@ open class TopBannerViewController: UIViewController {
     
     public func displayStepsTable() {
         dismissStepsTable()
+        return
         
         guard let progress = routeProgress, let parent = parent else {
             return
@@ -446,7 +478,7 @@ extension TopBannerViewController: InstructionsBannerViewDelegate {
         if isDisplayingSteps {
             dismissStepsTable()
         } else {
-            displayStepsTable()
+            //displayStepsTable()
         }
     }
     
